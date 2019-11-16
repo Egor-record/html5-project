@@ -1,0 +1,38 @@
+h1, h2, h3 {
+    font-family: 'Roboto', sans-serif;
+}
+
+p, a {
+    font-family: 'Open Sans', sans-serif;
+}
+
+video {
+    height:500px;
+    width:auto;
+}
+
+.video-section {
+    background-color: #e7dfdf;
+}
+
+.new {
+    position: relative;
+}
+
+.new:after {
+    position: absolute;
+    content: 'New';
+    top: -9px;
+    left: 61px;
+    font-style: italic;
+    color: brown;
+}
+
+a.nav-link:hover {
+    color: brown !important;
+}
+
+.article-overflow {
+    overflow-x: scroll;
+    height:150px;
+}

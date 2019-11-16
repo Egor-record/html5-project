@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/slyle.css">
+    <title>Евгений Понасенков | Итоговое задание</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul class="nav justify-content-center">
+                <li class="nav-item">
+                    <a class="nav-link active text-dark" href="/index.html">Главная</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="#">Контакты</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="#">Фото</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="#">Статьи</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="/video.html">Видео</a>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="container">
+            <h1 class="mt-5 ">
+                Фан сайт Евгения Понасенкова
+            </h1>
+        </div>
+    </header>
+    <main class="mt-5">
+        <div class="container">
+            <div class="d-inline-block">
+                <div>
+                <div class="bg-dark text-white pl-1 pr-1" id="place-for-book" style="width: 258px;
+                                            height: 37px;"></div></div>
+                <ul class="mt-5">
+                    <li class="mb-3 list-unstyled">
+                        <button class="btn btn-info" onclick="show_book();">Узнать лучшую книгу Евгения Понасенкова</button>
+                    </li>
+                    <li class="mb-3 list-unstyled">
+                        <button class="btn btn-danger" onclick="make_link();" id="get_link">Получить ссылку</button>
+                    </li>
+                    <li class="mb-3 list-unstyled">
+                        <button class="btn btn-dark" onclick="add_book();">Показать в консоле книги</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </main>
+    <section class="mt-5 mb-5">
+        <div class="container">
+            <h3 class="mb-5">Форма обратной связи с Евгением Понасенковым</h3>
+            <form class="js-form-submit">
+                <div class="form-group">
+                    <label for="inputEmail">Ваш адрес:</label>
+                    <input type="email" class="form-control js-input-safe" id="inputEmail" aria-describedby="emailHelp" placeholder="Почта" name="email" required="required">
+                    <small id="emailHelp" class="form-text text-muted">Ваш адрес будет знать только Евгений.</small>
+                </div>
+                <div class="form-group">
+                    <label for="inputName">Ваше имя</label>
+                    <input type="text" class="form-control js-input-safe" id="inputName" placeholder="Егор" name="name"  required="required">
+                </div>
+                <div class="form-group">
+                    <label for="inputName">Ваш телефон</label>
+                    <input type="text" class="form-control js-input-safe" id="inputphome" placeholder="Егор" name="phone">
+                </div>
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="check" required="required">
+                    <label class="form-check-label" for="check">Мне нравится творчество Евгения Понасенкова</label>
+                </div>
+                <div class="form-check mt-2">
+                    <input class="form-check-input" type="radio" name="radios" id="radios_1" value="Почта" checked>
+                    <label class="form-check-label" for="radios_1">
+                        Отправить ответ на почту
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="radios" id="radios_2" value="Телефон">
+                    <label class="form-check-label" for="radios_2">
+                        Отправить ответ на телефон
+                    </label>
+                </div>
+                <div class="form-group mt-3">
+                    <label for="inputBook">Любимая книга</label>
+                    <select id="inputBook" class="form-control" name="book">
+                        <option selected value="Первая научная война 1812 года">Первая научная война 1812 года</option>
+                        <option value="Другие">Другие</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Отправить</button>
+            </form>
+        </div>
+    </section>
+    <footer class="mt-5">
+        <div class="container">
+            <p>2019 год. Фан Клуб Евгения Понасенкова</p>
+        </div>
+
+    </footer>
+    <script>
+
+        const elem = document.querySelector('#place-for-book'),
+              books = [];
+
+        function show_book() {
+            elem.innerHTML = "Первая научная война 1812 года";
+        }
+        
+        function make_link() {
+            const value = elem.innerHTML;
+
+            if (value) {
+                elem.outerHTML = `<a href="/buy.html" class="bg-dark text-white pl-1 pr-1 mb-5">${value}</a>`;
+                document.querySelector("#get_link").setAttribute("disabled", "disabled");
+            }
+
+        }
+        
+        function add_book() {
+            books.push("Первая научная война 1812 года");
+            console.log(books);
+        }
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+
+        const back_URL = "/back.php";
+
+        $( document ).ready(function() {
+
+            $('.js-input-safe').each(function () {
+
+                if (sessionStorage.getItem($(this).attr('name'))) {
+                    $(this).val(sessionStorage.getItem($(this).attr('name')));
+                }
+
+                $(this).on('change', function () {
+                    sessionStorage.setItem( $(this).attr('name'), $(this).val());
+                });
+            })
+
+        });
+
+
+        $('.js-form-submit').submit(function (e) {
+            e.preventDefault();
+
+            const data = {};
+
+            $('.js-input-safe').each(function () {
+               data[$(this).attr('name')] = $(this).val();
+            });
+
+            data["where_to_send"] = $('.form-check-input[name="radios"]:checked').val();
+
+            data["book"] = $('#inputBook').val();
+
+
+            $.ajax({
+                method: "POST",
+                url: back_URL,
+                data: data,
+                contentType: "application/json"
+            }).done(function( msg ) {
+
+            });
+
+        });
+    </script>
+</body>
+</html>
